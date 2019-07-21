@@ -11,7 +11,9 @@
   "author": "Pepe Valdivia <jvaldivia@softweb.pe>",
   "license": "ISC",
   "dependencies": {
-    "restify": "^8.3.3"
+    "restify": "^8.3.3",
+    "sequelize": "^5.10.1",
+    "sqlite3": "^4.0.9"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"
