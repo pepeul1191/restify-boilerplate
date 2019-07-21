@@ -1,5 +1,7 @@
 # Restify JS Boilerplate
 
+Version node: 10+
+
 Instlación de dependencias:
 
     $ npm install
