@@ -19,3 +19,4 @@ Arrancar modo de producción la aplicación web:
 Fuentes:
 
 + http://restify.com/docs/home/
++ https://stackoverflow.com/questions/10973479/how-do-you-send-html-with-restify/41878336

@@ -7,17 +7,31 @@ function respond(req, res, next) {
   next();
 }
 
-var server = restify.createServer();
+var server = restify.createServer({
+  formatters: {
+    'application/json': function(req, res, body){
+        if(req.params.callback){
+            var callbackFunctionName = req.params.callback.replace(/[^A-Za-z0-9_\.]/g, '');
+            return callbackFunctionName + "(" + JSON.stringify(body) + ");";
+        } else {
+            return JSON.stringify(body);
+        }
+    },
+    'text/html': function(req, res, body){
+        return body;
+    }
+  }
+});
 
 server.use(function(req, res, next) {
   console.warn('run for all routes!');
-  res.header('Server', 'Ubuntu');
+  res.removeHeader('Server');
+  res.header('Server', 'Ubuntu, restify');
   return next();
 });
 
 async function list(req, res, next){
   var students = await models.Student.findAll({});
-  res.header('Content-Type', 'text/html; charset=utf-8');
   res.send(JSON.stringify(students));
   next();
 }
