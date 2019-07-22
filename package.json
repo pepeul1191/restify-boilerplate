@@ -11,8 +11,8 @@
   "author": "Pepe Valdivia <jvaldivia@softweb.pe>",
   "license": "ISC",
   "dependencies": {
+    "morgan": "^1.9.1",
     "restify": "^8.3.3",
-    "restify-router": "^0.5.1",
     "sequelize": "^5.10.1",
     "sqlite3": "^4.0.9"
   },
