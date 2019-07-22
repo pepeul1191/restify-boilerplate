@@ -1,5 +1,10 @@
 var restify = require('restify');
+var Router = require('restify-router').Router;
+
 const models = require('./configs/models');
+const serverConfigs = require('./configs/server');
+
+const demoRoutes = require('./routes/demo');
 
 function respond(req, res, next) {
   console.log('2++++++++++++++++');
@@ -7,21 +12,13 @@ function respond(req, res, next) {
   next();
 }
 
-var server = restify.createServer({
-  formatters: {
-    'application/json': function(req, res, body){
-        if(req.params.callback){
-            var callbackFunctionName = req.params.callback.replace(/[^A-Za-z0-9_\.]/g, '');
-            return callbackFunctionName + "(" + JSON.stringify(body) + ");";
-        } else {
-            return JSON.stringify(body);
-        }
-    },
-    'text/html': function(req, res, body){
-        return body;
-    }
-  }
-});
+var routerInstance = new Router();
+
+// routerInstance.get('/demo', demoRoutes);
+
+var server = restify.createServer(serverConfigs.formatters);
+
+routerInstance.applyRoutes(server, '/admin');
 
 server.use(function(req, res, next) {
   console.warn('run for all routes!');
