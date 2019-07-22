@@ -13,6 +13,11 @@ server.use(logger('dev'));
 server.get('/hello/:name', demoRoutes.respond);
 server.get('/list', demoRoutes.list);
 server.head('/hello/:name', demoRoutes.respond);
+// static foler
+server.get('/*', restify.plugins.serveStatic({
+  directory: './public',
+  // default: 'index.html'
+}));
 // start app
 server.listen(8080, function() {
   console.log('%s listening at %s', server.name, server.url);

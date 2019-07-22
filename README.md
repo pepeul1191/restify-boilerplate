@@ -21,3 +21,4 @@ Fuentes:
 + http://restify.com/docs/home/
 + https://stackoverflow.com/questions/10973479/how-do-you-send-html-with-restify/41878336
 + https://github.com/shermify/restify-example
++ http://restify.com/docs/plugins-api/#servestatic
