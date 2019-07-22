@@ -8,36 +8,31 @@ var preResponse = function(req, res, next) {
   res.header('Server', 'Ubuntu, restify');
   return next();
 }
-/*
-var showLogs = function(){
-  if (constants.middlewares.logs){
-    return async (ctx, next) => {
-      await next();
-      const rt = ctx.response.get('X-Response-Time');
-      console.log(`${ctx.method} ${ctx.status} ${ctx.url} - ${rt}`);
-    }
-  } else{
-    return async (ctx, next) => {
-      await next();
-    };
-  }
-}
-*/
+
 var getLanguage = function(ctx){
   return 'sp';
 }
 
 var errorNotFoundHandler = (req, res, err, cb) => {
+  var status = 500;
+  var message = '';
   // show error in console
-  // console.log(err);
-  console.log('1 ++++++++++++++++++++++++++++++++++++++++');
-  console.log('metodo ' + req.method);
-  console.log(cb.code);
-  console.log('2 ++++++++++++++++++++++++++++++++++++++++');
-  return cb();
+  console.log(err);
+  // console.log('metodo ' + req.method);
+  // set status
+  if (err.toString() == 'ResourceNotFoundError: / does not exist'){
+    status = 404;
+    message = 'Eror 404 : Recurso no encontrado';
+  }else{
+    message = JSON.stringify({
+      title: 'Ups =(',
+      description: err,
+    });
+  }
+  res.status(status);
+  return res.send(message);
 }
 
 exports.preResponse= preResponse;
 exports.getLanguage = getLanguage;
 exports.errorNotFoundHandler = errorNotFoundHandler;
-//exports.showLogs = showLogs;
