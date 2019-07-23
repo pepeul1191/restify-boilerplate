@@ -1,5 +1,6 @@
-// var constants = require('./constants');
-// var contents = require('./contents');
+var logger  = require('morgan');
+var constants = require('./constants');
+var contents = require('./contents');
 
 // app middlewares
 
@@ -7,6 +8,10 @@ var preResponse = function(req, res, next) {
   res.removeHeader('Server');
   res.header('Server', 'Ubuntu, restify');
   return next();
+}
+
+var showLogs = function(){
+  return logger('dev');
 }
 
 var getLanguage = function(ctx){
@@ -36,3 +41,4 @@ var errorNotFoundHandler = (req, res, err, cb) => {
 exports.preResponse= preResponse;
 exports.getLanguage = getLanguage;
 exports.errorNotFoundHandler = errorNotFoundHandler;
+exports.showLogs = showLogs;

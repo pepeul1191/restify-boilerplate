@@ -1,5 +1,4 @@
 var restify = require('restify');
-var logger  = require('morgan');
 // export configs
 const middlewares = require('./configs/middlewares');
 const serverConfigs = require('./configs/server');
@@ -8,7 +7,7 @@ const demoRoutes = require('./routes/demo');
 var server = restify.createServer(serverConfigs.formatters);
 // middlewares
 server.use(middlewares.preResponse);
-server.use(logger('dev'));
+server.use(middlewares.showLogs());
 // routes
 server.get('/hello/:name', demoRoutes.respond);
 server.get('/list', demoRoutes.list);
