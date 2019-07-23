@@ -2,17 +2,15 @@ var restify = require('restify');
 // export configs
 const middlewares = require('./configs/middlewares');
 const serverConfigs = require('./configs/server');
-const demoRoutes = require('./routes/demo');
+const routes = require('./configs/routes');
 // server instance
 var server = restify.createServer(serverConfigs.formatters);
 // middlewares
 server.use(middlewares.preResponse);
 server.use(middlewares.showLogs());
 // routes
-server.get('/hello/:name', demoRoutes.respond);
-server.get('/list', demoRoutes.list);
-server.head('/hello/:name', demoRoutes.respond);
-// static foler
+routes.register(server);
+// static folder
 server.get('/*', restify.plugins.serveStatic({
   directory: './public',
   // default: 'index.html'
